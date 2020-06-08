@@ -46,7 +46,7 @@
     },
     "apimname": {
       "type": "String",
-      "defaultValue": "wbpocAPPapim"
+      "defaultValue": "wbpocAPPapimaks"
     },
     "apimsku": {
       "type": "string",
@@ -135,6 +135,61 @@
     "dev_zone_name": {
       "type": "string",
       "defaultValue": "developer.azure-api.net"
+    },
+    "AksresourceName": {
+      "type": "string",
+      "defaultValue": "wbaksprivate"
+    },
+    "dnsPrefix": {
+        "type": "string",
+        "defaultValue": "wbaksprivate-dns"
+    },
+    "kubernetesVersion": {
+        "type": "string",
+        "defaultValue": "1.15.11"
+    },
+    "networkPlugin": {
+        "type": "string",
+        "defaultValue": "kubenet"
+    },
+    "enableRBAC": {
+        "type": "bool",
+        "defaultValue": true
+    },
+    "vmssNodePool": {
+        "type": "bool",
+        "defaultValue": true
+    },
+    "windowsProfile": {
+        "type": "bool",
+        "defaultValue": false
+    },
+    "enablePrivateCluster": {
+        "type": "bool",
+        "defaultValue": true
+    },
+    "enableHttpApplicationRouting": {
+        "type": "bool",
+        "defaultValue": true
+    },
+    "networkPolicy": {
+        "type": "string",
+        "defaultValue": "calico"
+    },
+    "vnetSubnetID": {
+        "type": "string"
+    },
+    "serviceCidr": {
+        "type": "string",
+        "defaultValue": "10.0.0.0/24"
+    },
+    "dnsServiceIP": {
+        "type": "string",
+        "defaultValue": "10.0.0.10"
+    },
+    "dockerBridgeCidr": {
+        "type": "string",
+        "defaultValue": "172.17.0.1/24"
     }
   },
   "variables": {
@@ -146,7 +201,8 @@
     "deployAzureBastionTemplateURL": "[concat(variables('gitUri'),'/AzureBastion.json')]",
     "deployWindowsServerTemplateURL": "[concat(variables('gitUri'),'/WindowsVirtualMachine.json')]",
     "deployDNSZoneTemplateURL": "[concat(variables('gitUri'),'/PrivateDNSZone.json')]",
-    "deployDNSZoneARecordTemplateURL": "[concat(variables('gitUri'),'/PrivateDNSARecord.json')]"
+    "deployDNSZoneARecordTemplateURL": "[concat(variables('gitUri'),'/PrivateDNSARecord.json')]",
+    "deployAzureAKSTemplateURL": "[concat(variables('gitUri'),'/PrivateAKSCluster.json')]"
   },
   "resources": [
     {
@@ -432,6 +488,71 @@
           },
           "sku": {
             "value": "[parameters('jumpSKU')]"
+          }
+        }
+      }
+    },
+    {
+      "name": "deployPrivateAKSCluster",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "dependsOn": [
+        "deployVNET"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('deployAzureAKSTemplateURL')]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "AksresourceName": {
+            "value": "wbaksprivate"
+          },
+          "location": {
+              "value": "eastus"
+          },
+          "dnsPrefix": {
+              "value": "wbaksprivate-dns"
+          },
+          "kubernetesVersion": {
+              "value": "1.15.11"
+          },
+          "networkPlugin": {
+              "value": "kubenet"
+          },
+          "maxPods": {
+              "value": 30
+          },
+          "enableRBAC": {
+              "value": true
+          },
+          "vmssNodePool": {
+              "value": true
+          },
+          "windowsProfile": {
+              "value": false
+          },
+          "enablePrivateCluster": {
+              "value": true
+          },
+          "enableHttpApplicationRouting": {
+              "value": false
+          },
+          "networkPolicy": {
+              "value": "calico"
+          },
+          "vnetSubnetID": {
+              "value": "[reference('deployVNET').outputs.vnetID.value]"
+          },
+          "serviceCidr": {
+              "value": "10.0.0.0/24"
+          },
+          "dnsServiceIP": {
+              "value": "10.0.0.10"
+          },
+          "dockerBridgeCidr": {
+              "value": "172.17.0.1/24"
           }
         }
       }

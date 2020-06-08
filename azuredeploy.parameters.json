@@ -30,7 +30,7 @@
             "value": "wbpocapimai"
         },
         "apimname": {
-            "value": "wbpocAPPapim"
+            "value": "wbpocAPPapimaks"
         },
         "apimsku": {
             "value": "Developer"
@@ -92,6 +92,54 @@
         },
         "jumpSKU": {
             "value": "2019-Datacenter"
+        },
+        "AksresourceName": {
+            "value": "wbaksprivatecalico"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "dnsPrefix": {
+            "value": "wbaksprivatecalico-dns"
+        },
+        "kubernetesVersion": {
+            "value": "1.15.11"
+        },
+        "networkPlugin": {
+            "value": "kubenet"
+        },
+        "maxPods": {
+            "value": 30
+        },
+        "enableRBAC": {
+            "value": true
+        },
+        "vmssNodePool": {
+            "value": true
+        },
+        "windowsProfile": {
+            "value": false
+        },
+        "enablePrivateCluster": {
+            "value": true
+        },
+        "enableHttpApplicationRouting": {
+            "value": false
+        },
+        "networkPolicy": {
+            "value": "calico"
+        },
+        "vnetSubnetID": {
+            "value": "[reference('deployVNET').outputs.vnetID.value]"
+        },
+        "serviceCidr": {
+            "value": "10.0.0.0/24"
+        },
+        "dnsServiceIP": {
+            "value": "10.0.0.10"
+        },
+        "dockerBridgeCidr": {
+            "value": "172.17.0.1/24"
         }
     }
 }
