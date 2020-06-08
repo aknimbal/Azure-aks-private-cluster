@@ -3,37 +3,37 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vNETName": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "wbpocAPPVnet",
       "metadata": {
         "description": "Name of the virtual network to be created"
       }
     },
     "addressRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue":"10.0.0.0/8",
       "metadata": {
         "description": "Administrator password for the local admin account"
       }
     },
     "apimRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "10.0.1.0/24"
     },
     "aksRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "10.1.0.0/16"
     },
     "privateEPRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue":"10.0.2.0/24"
     },
     "sharedRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "10.0.3.0/24"
     },
     "bastionRange": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "10.0.4.0/24"
     },
     "appgwRange": {
@@ -45,7 +45,7 @@
       "type": "string"
     },
     "apimname": {
-      "type": "String",
+      "type": "string",
       "defaultValue": "wbpocAPPapimaks"
     },
     "apimsku": {
@@ -121,7 +121,7 @@
       "defaultValue": "jumpAdmin"
     },
     "adminPassword": {
-      "type": "secureString",
+      "type": "securestring",
       "defaultValue": "ABCabc1234"
     },
     "jumpSKU": {
