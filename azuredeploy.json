@@ -507,52 +507,52 @@
         },
         "parameters": {
           "AksresourceName": {
-            "value": "wbaksprivate"
+            "value": "[parameters('AksresourceName')]"
           },
           "location": {
-              "value": "eastus"
+              "value": "[resourceGroup().location]"
           },
           "dnsPrefix": {
-              "value": "wbaksprivate-dns"
+              "value": "[parameters('dnsPrefix')]"
           },
           "kubernetesVersion": {
-              "value": "1.15.11"
+              "value": "[parameters('kubernetesVersion')]"
           },
           "networkPlugin": {
-              "value": "kubenet"
+              "value": "[parameters('networkPlugin')]"
           },
           "maxPods": {
-              "value": 30
+              "value": "[parameters('maxPods')]"
           },
           "enableRBAC": {
-              "value": true
+              "value": "[parameters('enableRBAC')]"
           },
           "vmssNodePool": {
-              "value": true
+              "value": "[parameters('vmssNodePool')]"
           },
           "windowsProfile": {
-              "value": false
+              "value": "[parameters('windowsProfile')]"
           },
           "enablePrivateCluster": {
-              "value": true
+              "value": "[parameters('enablePrivateCluster')]"
           },
           "enableHttpApplicationRouting": {
-              "value": false
+              "value": "[parameters('enableHttpApplicationRouting')]"
           },
           "networkPolicy": {
-              "value": "calico"
+              "value": "[parameters('networkPolicy')]"
           },
           "vnetSubnetID": {
               "value": "[reference('deployVNET').outputs.vnetID.value]"
           },
           "serviceCidr": {
-              "value": "10.0.0.0/24"
+              "value": "[parameters('serviceCidr')]"
           },
           "dnsServiceIP": {
-              "value": "10.0.0.10"
+              "value": "[parameters('dnsServiceIP')]"
           },
           "dockerBridgeCidr": {
-              "value": "172.17.0.1/24"
+              "value": "[parameters('dockerBridgeCidr')]"
           }
         }
       }
