@@ -106,12 +106,6 @@
                 "description": "Network policy used for building Kubernetes network."
             }
         },
-        "vnetSubnetID": {
-            "type": "string",
-            "metadata": {
-                "description": "Resource ID of virtual network subnet used for nodes and/or pods IP assignment."
-            }
-        },
         "serviceCidr": {
             "type": "string",
             "metadata": {
@@ -152,7 +146,7 @@
                         "storageProfile": "ManagedDisks",
                         "type": "VirtualMachineScaleSets",
                         "mode": "System",
-                        "vnetSubnetID": "[parameters('vnetSubnetID')]"
+                        "vnetSubnetID": "[resourceId('Microsoft.Network/virtualNetworks', parameters('VNETName'))]"
                     }
                 ],
                 "networkProfile": {
@@ -196,7 +190,7 @@
                             "properties": {
                                 "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '4d97b98b-1d4f-4787-a291-c67834d212e7')]",
                                 "principalId": "[reference(parameters('AKSresourceName')).identityProfile.kubeletidentity.objectId]",
-                                "scope": "[parameters('vnetSubnetId')]"
+                                "scope": "[resourceId('Microsoft.Network/virtualNetworks', parameters('VNETName'))]"
                             }
                         }
                     ]
