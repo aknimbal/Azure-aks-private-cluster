@@ -121,7 +121,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2020-04-01",
+            "apiVersion": "2020-05-01",
             "dependsOn": [],
             "type": "Microsoft.ContainerService/managedClusters",
             "location": "[parameters('location')]",
@@ -168,7 +168,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "name": "wbClusterSubnetRoleAssignmentDeployment-20200607210249",
-            "apiVersion": "2020-04-01",
+            "apiVersion": "2020-05-01",
             "properties": {
                 "mode": "Incremental",
                 "template": {
