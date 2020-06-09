@@ -495,7 +495,7 @@
     {
       "name": "deployPrivateAKSCluster",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2015-01-01",
+      "apiVersion": "2017-05-10",
       "dependsOn": [
         "deployVNET"
       ],
