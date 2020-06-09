@@ -8,12 +8,6 @@
                 "description": "The name of the Managed Cluster resource."
             }
         },
-        "resourceGroup": {
-            "type": "string",
-            "metadata": {
-                "description": "The name of the resource group."
-            }
-        },
         "location": {
             "type": "string",
             "metadata": {
@@ -187,7 +181,6 @@
             "type": "Microsoft.Resources/deployments",
             "name": "ClusterSubnetRoleAssignmentDeployment",
             "apiVersion": "2017-05-10",
-            "resourceGroup": "[parameters('resourceGroup')]",
             "subscriptionId": "[subscription().subscriptionId]",
             "properties": {
                 "mode": "Incremental",
