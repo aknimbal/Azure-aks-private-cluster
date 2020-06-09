@@ -19,4 +19,4 @@ if ((Get-AzureRmResourceGroup -Name $ResourceGroupName -Location $ResourceGroupL
 
 Write-Output '', 'Starting ARM deployment of services. This might take a while'
 
-New-AzureRMResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile ./azuredeploy.json -TemplateParameterFile ./azuredeploy.parameters.json
+New-AzureRMResourceGroupDeployment -ResourceGroupName $ResourceGroupName -TemplateFile ./azuredeploy.json -TemplateParameterFile ./azuredeploy.parameters.json -DeploymentDebugLogLevel All

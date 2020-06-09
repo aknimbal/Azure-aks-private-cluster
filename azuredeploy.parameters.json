@@ -96,9 +96,6 @@
         "AksresourceName": {
             "value": "wbaksprivatecalico"
         },
-        "location": {
-            "value": "eastus"
-        },
         "dnsPrefix": {
             "value": "wbaksprivatecalico-dns"
         },
@@ -107,9 +104,6 @@
         },
         "networkPlugin": {
             "value": "kubenet"
-        },
-        "maxPods": {
-            "value": 30
         },
         "enableRBAC": {
             "value": true
