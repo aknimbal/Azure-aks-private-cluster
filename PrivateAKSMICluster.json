@@ -208,7 +208,7 @@
     "outputs": {
         "controlPlaneFQDN": {
             "type": "string",
-            "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('resourceName'))).privateFQDN]"
+            "value": "[reference(concat('Microsoft.ContainerService/managedClusters/', parameters('AKSresourceName'))).privateFQDN]"
         }
     }
 }
