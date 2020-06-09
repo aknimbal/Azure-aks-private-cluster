@@ -542,6 +542,9 @@
           "networkPolicy": {
               "value": "[parameters('networkPolicy')]"
           },
+          "vnetSubnetID": {
+              "value": "[reference('deployVNET').outputs.aksSubnetID.value]"
+          },
           "serviceCidr": {
               "value": "[parameters('serviceCidr')]"
           },
