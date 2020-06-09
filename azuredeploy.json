@@ -521,9 +521,6 @@
           "networkPlugin": {
               "value": "[parameters('networkPlugin')]"
           },
-          "maxPods": {
-              "value": "[parameters('maxPods')]"
-          },
           "enableRBAC": {
               "value": "[parameters('enableRBAC')]"
           },
