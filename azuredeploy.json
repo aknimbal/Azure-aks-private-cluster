@@ -509,9 +509,6 @@
           "AksresourceName": {
             "value": "[parameters('AksresourceName')]"
           },
-          "resourceGroup": {
-            "value": "[resourceGroup().name]"
-          },
           "location": {
               "value": "[resourceGroup().location]"
           },
