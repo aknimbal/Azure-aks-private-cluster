@@ -202,7 +202,7 @@
     "deployWindowsServerTemplateURL": "[concat(variables('gitUri'),'/WindowsVirtualMachine.json')]",
     "deployDNSZoneTemplateURL": "[concat(variables('gitUri'),'/PrivateDNSZone.json')]",
     "deployDNSZoneARecordTemplateURL": "[concat(variables('gitUri'),'/PrivateDNSARecord.json')]",
-    "deployAzureAKSTemplateURL": "[concat(variables('gitUri'),'/PrivateAKSCluster.json')]"
+    "deployAzureAKSTemplateURL": "[concat(variables('gitUri'),'/PrivateAKSMICluster.json')]"
   },
   "resources": [
     {
@@ -509,9 +509,18 @@
           "AksresourceName": {
             "value": "[parameters('AksresourceName')]"
           },
+          "resourceGroup": {
+            "value": "[resourceGroup().name]"
+          },
           "location": {
               "value": "[resourceGroup().location]"
           },
+          "VNetName" : {
+            "value": "[parameters('vNETName')]"
+          },
+          "SubnetName" : {
+            "value": "appgw-sn"
+          },  
           "dnsPrefix": {
               "value": "[parameters('dnsPrefix')]"
           },
