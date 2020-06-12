@@ -14,6 +14,12 @@
                 "description": "The location of AKS resource."
             }
         },
+        "nodeResourceGroup": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of AKS node resource group."
+            }
+        },
         "VNetName": {
             "type": "string",
             "metadata": {
@@ -88,14 +94,14 @@
         },
         "enablePrivateCluster": {
             "type": "bool",
-            "defaultValue": false,
+            "defaultValue": true,
             "metadata": {
                 "description": "Enable private network access to the Kubernetes cluster."
             }
         },
         "enableHttpApplicationRouting": {
             "type": "bool",
-            "defaultValue": true,
+            "defaultValue": false,
             "metadata": {
                 "description": "Boolean flag to turn on and off http application routing."
             }
@@ -167,6 +173,7 @@
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
                 },
                 "addonProfiles": {
+                    "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
                     "httpApplicationRouting": {
                         "enabled": "[parameters('enableHttpApplicationRouting')]"
                     }

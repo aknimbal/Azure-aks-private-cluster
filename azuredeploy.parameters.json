@@ -94,10 +94,13 @@
             "value": "2019-Datacenter"
         },
         "AksresourceName": {
-            "value": "wbaksprivatecalico"
+            "value": "wbakscalico"
+        },
+        "nodeResourceGroup": {
+            "value": "wbaksresources"
         },
         "dnsPrefix": {
-            "value": "wbaksprivatecalico-dns"
+            "value": "wbakscalico-dns"
         },
         "kubernetesVersion": {
             "value": "1.15.11"

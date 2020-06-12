@@ -140,6 +140,10 @@
       "type": "string",
       "defaultValue": "wbaksprivate"
     },
+    "nodeResourceGroup": {
+      "type": "string",
+      "defaultValue": "wbaksresources"
+    },
     "dnsPrefix": {
         "type": "string",
         "defaultValue": "wbaksprivate-dns"
@@ -508,6 +512,9 @@
           },
           "location": {
               "value": "[resourceGroup().location]"
+          },
+          "nodeResourceGroup":{
+            "value": "[parameters('nodeResourceGroup')]"
           },
           "VNetName" : {
             "value": "[parameters('vNETName')]"
