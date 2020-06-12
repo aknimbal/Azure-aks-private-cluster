@@ -1,6 +1,6 @@
 #Requires -Version 3.0
 
-Connect-AzureRmAccount
+#Connect-AzureRmAccount
 
 # Variables
 #-----------------------------------------------------------

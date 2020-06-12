@@ -146,6 +146,7 @@
             "name": "[parameters('AKSresourceName')]",
             "properties": {
                 "kubernetesVersion": "[parameters('kubernetesVersion')]",
+                "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
                 "enableRBAC": "[parameters('enableRBAC')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
                 "agentPoolProfiles": [
@@ -173,7 +174,6 @@
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
                 },
                 "addonProfiles": {
-                    "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
                     "httpApplicationRouting": {
                         "enabled": "[parameters('enableHttpApplicationRouting')]"
                     }
