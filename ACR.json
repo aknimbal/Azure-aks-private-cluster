@@ -2,7 +2,7 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "vaultName": {
+        "acrName": {
             "type": "String"
         },
         "workspaceId": {
@@ -14,30 +14,25 @@
     },
     "resources": [
         {
-            "type": "Microsoft.KeyVault/vaults",
-            "apiVersion": "2016-10-01",
-            "name": "[parameters('vaultName')]",
+            "type": "Microsoft.ContainerRegistry/registries",
+            "apiVersion": "2019-12-01-preview",
+            "name": "[parameters('acrName')]",
             "location": "[resourceGroup().location]",
-            "tags": {
+            "dependsOn": [
+                
+            ],
+            "sku": {
+                "name": "Premium"
             },
             "properties": {
-                "sku": {
-                    "family": "A",
-                    "name": "standard"
-                },
-                "tenantId": "[subscription().tenantId]",
-                "accessPolicies": [],
-                "enabledForDeployment": true,
-                "enabledForDiskEncryption": true,
-                "enabledForTemplateDeployment": true,
-                "enableSoftDelete": true
+                "publicNetworkAccess": "Disabled"
             },
             "resources": [
                 {
                     "type": "providers/diagnosticSettings",
                     "name": "Microsoft.Insights/loganalytics",
                     "dependsOn": [
-                        "[parameters('vaultName')]"
+                        "[parameters('acrName')]"
                     ],
                     "apiVersion": "2017-05-01-preview",
                     "properties": {
@@ -45,7 +40,11 @@
                         "workspaceId": "[parameters('workspaceId')]",
                         "logs": [
                             {
-                                "category": "AuditEvent",
+                                "category": "ContainerRegistryRepositoryEvents",
+                                "enabled": true
+                            },
+                            {
+                                "category": "ContainerRegistryLoginEvents",
                                 "enabled": true
                             }
                         ],
@@ -65,9 +64,9 @@
         }
     ],
     "outputs": {
-        "vaultId": {
+        "acrId": {
             "type": "string",
-            "value": "[resourceId('Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+            "value": "[resourceId('Microsoft.ContainerRegistry/registries', parameters('acrName'))]"
         }
     }
 }

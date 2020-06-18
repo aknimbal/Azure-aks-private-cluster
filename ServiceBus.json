@@ -1,43 +1,34 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01-preview/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "vaultName": {
+        "sbName": {
             "type": "String"
         },
         "workspaceId": {
             "type": "string"
         }
     },
-    "variables": {
-        
-    },
     "resources": [
         {
-            "type": "Microsoft.KeyVault/vaults",
-            "apiVersion": "2016-10-01",
-            "name": "[parameters('vaultName')]",
+            "type": "Microsoft.ServiceBus/namespaces",
+            "apiVersion": "2018-01-01-preview",
+            "name": "[parameters('sbName')]",
             "location": "[resourceGroup().location]",
-            "tags": {
+            "sku": {
+                "name": "Premium",
+                "tier": "Premium",
+                "capacity": 1
             },
             "properties": {
-                "sku": {
-                    "family": "A",
-                    "name": "standard"
-                },
-                "tenantId": "[subscription().tenantId]",
-                "accessPolicies": [],
-                "enabledForDeployment": true,
-                "enabledForDiskEncryption": true,
-                "enabledForTemplateDeployment": true,
-                "enableSoftDelete": true
+                "zoneRedundant": true
             },
             "resources": [
                 {
                     "type": "providers/diagnosticSettings",
                     "name": "Microsoft.Insights/loganalytics",
                     "dependsOn": [
-                        "[parameters('vaultName')]"
+                        "[parameters('sbName')]"
                     ],
                     "apiVersion": "2017-05-01-preview",
                     "properties": {
@@ -45,7 +36,7 @@
                         "workspaceId": "[parameters('workspaceId')]",
                         "logs": [
                             {
-                                "category": "AuditEvent",
+                                "category": "OperationalLogs",
                                 "enabled": true
                             }
                         ],
@@ -60,14 +51,28 @@
                             }
                         ]
                     }
+                },
+                {
+                    "type": "Microsoft.ServiceBus/namespaces/networkRuleSets",
+                    "apiVersion": "2018-01-01-preview",
+                    "name": "[concat(parameters('sbName'), '/default')]",
+                    "location": "East US",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.ServiceBus/namespaces', parameters('sbName'))]"
+                    ],
+                    "properties": {
+                        "defaultAction": "Deny",
+                        "virtualNetworkRules": [],
+                        "ipRules": []
+                    }
                 }
             ]
         }
     ],
     "outputs": {
-        "vaultId": {
+        "sbId": {
             "type": "string",
-            "value": "[resourceId('Microsoft.KeyVault/vaults', parameters('vaultName'))]"
+            "value": "[resourceId('Microsoft.ServiceBus/namespaces', parameters('sbName'))]"
         }
     }
 }
