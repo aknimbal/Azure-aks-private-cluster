@@ -147,7 +147,6 @@
             "properties": {
                 "kubernetesVersion": "[parameters('kubernetesVersion')]",
                 "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
-                "outboundType": "userDefinedRouting",
                 "enableRBAC": "[parameters('enableRBAC')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
                 "agentPoolProfiles": [
@@ -169,7 +168,8 @@
                     "networkPolicy": "[parameters('networkPolicy')]",
                     "serviceCidr": "[parameters('serviceCidr')]",
                     "dnsServiceIP": "[parameters('dnsServiceIP')]",
-                    "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]"
+                    "dockerBridgeCidr": "[parameters('dockerBridgeCidr')]",
+                    "outboundType": "userDefinedRouting"
                 },
                 "apiServerAccessProfile": {
                     "enablePrivateCluster": "[parameters('enablePrivateCluster')]"
