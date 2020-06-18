@@ -147,6 +147,7 @@
             "properties": {
                 "kubernetesVersion": "[parameters('kubernetesVersion')]",
                 "nodeResourceGroup": "[parameters('nodeResourceGroup')]",
+                "outboundType": "userDefinedRouting",
                 "enableRBAC": "[parameters('enableRBAC')]",
                 "dnsPrefix": "[parameters('dnsPrefix')]",
                 "agentPoolProfiles": [
